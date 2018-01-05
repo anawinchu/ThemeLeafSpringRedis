@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Studentlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+
+	<style>
+	 div.shadow-box {
+		 margin-outside: 10px;
+		 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		 text-align: center;
+	 }
+ 	</style>
+
+</head>
+<body>
+	<div class="shadow-box ">
+		<h1>Students</h1>
+
+		<table class="table" id="edittable">
+			<tr>
+				<th>#</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Department</th>
+				<th>Action</th>
+			</tr>
+			<!--<tr th:each = "student : ${students}">-->
+				<!--<td th:text="${student.id}"></td>-->
+				<!--<td th:text="${student.firstName}"></td>-->
+				<!--<td th:text="${student.lastName}"></td>-->
+				<!--<td th:text="${student.email}"></td>-->
+				<!--<td th:text="${student.department}"></td>-->
+				<!--<td><a th:href="@{/edit/(firstName=,lastName=${student.lastName})}" class="btn btn-success">Edit</a> &nbsp; <a th:href="@{/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a></td>-->
+
+					<!--</tr>-->
+			<tr th:each = "student : ${students}">
+
+				<form th:object="${newstudent}" th:action="@{save}" action="#" method="post">
+					<table class="table ">
+						<tr>
+							<td>
+								<input disabled="disabled" type="text" name="firstName" id="firstName" th:value="${student.firstName}"  class="form-control"
+									   placeholder="Firstname" />
+							</td>
+							<td>
+								<input type="text" name="lastName" id="lastName" th:value="${student.lastName}" class="form-control"
+									   placeholder="Lastname" />
+							</td>
+							<td>
+								<input type="text" name="email" id="email" th:value="${student.email}" class="form-control"
+									   placeholder="Email" />
+							</td>
+							<td>
+								<input type="text" name="department" id="department" th:value="${student.department}" class="form-control"
+									   placeholder="Department" />
+							</td>
+							<td><input type="submit" class="btn btn-success" value="Save"/></td>
+
+						</tr>
+					</table>
+				</form>
+
+			</tr>
+		</table>
+	</div>
+	<div class="shadow-box ">
+	<h1>New student</h1>
+		<form th:object="${newstudent}" th:action="@{save}" action="#" method="post">
+			<table class="table table-striped">
+				<tr>
+					<td>
+						<input type="text" th:field="*{firstName}" class="form-control"
+							   placeholder="Firstname" />
+					</td>
+					<td>
+						<input type="text" th:field="*{lastName}" class="form-control"
+						   	placeholder="Lastname" />
+					</td>
+					<td>
+						<input type="text" th:field="*{email}" class="form-control"
+							   placeholder="Email" />
+					</td>
+					<td>
+						<input type="text" th:field="*{department}" class="form-control"
+							   placeholder="Department" />
+					</td>
+					<td><input type="submit" class="btn btn-success" value="Save"/></td>
+
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script src="../static/js/jquery-3.2.1.min.js" th:src="@{js/jquery-3.2.1.min.js}" ></script>
+	<script src="../static/js/bootstrap.min.js}" th:src="@{js/bootstrap.min.js}" ></script>
+	<script src="../static/js/jquery.tabledit.js}" th:src="@{js/jquery.tabledit.js}" ></script>
+
+	<script>
+        $('#edittable').Tabledit({
+            editButton: false,
+            removeButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[1, 'First Name'], [2, 'Last Name'],[3, 'Email'],[4, 'Department']]
+            }
+
+        });
+
+	</script>
+</body>
+</html>

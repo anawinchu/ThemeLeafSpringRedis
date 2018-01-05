@@ -1,0 +1,4 @@
+fi/haagahelia/course/CrudbootApplication.class
+fi/haagahelia/course/repository/StudentRepository.class
+fi/haagahelia/course/controller/StudentController.class
+fi/haagahelia/course/model/Student.class
